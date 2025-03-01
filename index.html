@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Birthday Celebration for Halima Sultan</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(45deg, #ff4081, #ff69b4, #ff1493);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            flex-direction: column;
+            text-align: center;
+            position: relative;
+            animation: changeBackground 10s infinite alternate;
+        }
+
+        @keyframes changeBackground {
+            0% { background: #ff4081; }
+            50% { background: #ff69b4; }
+            100% { background: #ff1493; }
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #fff;
+            animation: bounce 1s infinite alternate, glow 2s infinite alternate;
+            margin-bottom: 20px;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 10px #fff; }
+            50% { text-shadow: 0 0 20px #ff1493, 0 0 30px #ff69b4; }
+            100% { text-shadow: 0 0 10px #fff; }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: openCard 2s forwards;
+            max-width: 500px;
+            margin: 20px;
+        }
+
+        @keyframes openCard {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .message {
+            font-size: 1.2rem;
+            color: #333;
+            line-height: 1.6;
+            margin: 1rem 0;
+        }
+
+        .typed {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid #ff4081;
+            animation: typing 3s steps(40, end), blink 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent; }
+            50% { border-color: #ff4081; }
+        }
+
+        .balloons {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 50px;
+            height: 70px;
+            background-color: red;
+            border-radius: 50%;
+            animation: floatUp 5s linear infinite;
+            cursor: pointer;
+        }
+
+        .balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            width: 2px;
+            height: 50px;
+            background: #fff;
+            transform: translateX(-50%);
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+
+        .gifts {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .gift {
+            position: absolute;
+            font-size: 30px;
+            animation: floatGift 5s linear infinite;
+        }
+
+        @keyframes floatGift {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        .fireworks {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .firework {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff4081;
+            border-radius: 50%;
+            animation: explode 1s forwards;
+        }
+
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(10); opacity: 0; }
+        }
+
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .music-player button {
+            background: #ff4081;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎉 Happy Birthday, Halima Sultan! 🎂</h1>
+    <div class="card">
+        <div class="message">
+            <p class="typed">Dear Halima,<br>
+            Wishing you a day filled with love, joy, and endless happiness! 💖<br>
+            May all your dreams come true! 🌟</p>
+        </div>
+    </div>
+    <div class="balloons"></div>
+    <div class="gifts"></div>
+    <div class="fireworks"></div>
+
+    <!-- Music Player -->
+    <div class="music-player">
+        <button onclick="playMusic()">🎵 Play Music</button>
+        <audio id="birthdaySong" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+    </div>
+
+    <script>
+        // Create Balloons
+        function createBalloons() {
+            const balloonContainer = document.querySelector('.balloons');
+            for (let i = 0; i < 15; i++) {
+                let balloon = document.createElement('div');
+                balloon.classList.add('balloon');
+                balloon.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 60%)`;
+                balloon.style.left = `${Math.random() * 100}vw`;
+                balloon.style.animationDuration = `${Math.random() * 3 + 3}s`;
+                balloon.addEventListener('click', () => {
+                    balloon.remove();
+                    createFirework(balloon.offsetLeft, balloon.offsetTop);
+                });
+                balloonContainer.appendChild(balloon);
+            }
+        }
+
+        // Create Gifts
+        function createGifts() {
+            const giftContainer = document.querySelector('.gifts');
+            for (let i = 0; i < 10; i++) {
+                let gift = document.createElement('div');
+                gift.classList.add('gift');
+                gift.innerHTML = '🎁';
+                gift.style.left = `${Math.random() * 100}vw`;
+                gift.style.animationDuration = `${Math.random() * 3 + 3}s`;
+                giftContainer.appendChild(gift);
+            }
+        }
+
+        // Create Fireworks
+        function createFirework(x, y) {
+            const fireworkContainer = document.querySelector('.fireworks');
+            const firework = document.createElement('div');
+            firework.classList.add('firework');
+            firework.style.left = `${x}px`;
+            firework.style.top = `${y}px`;
+            firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 60%)`;
+            fireworkContainer.appendChild(firework);
+            setTimeout(() => firework.remove(), 1000);
+        }
+
+        // Play Music
+        function playMusic() {
+            const audio = document.getElementById('birthdaySong');
+            audio.play();
+        }
+
+        // Initialize Animations
+        createBalloons();
+        createGifts();
+    </script>
+</body>
+</html>
